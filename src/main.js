@@ -1,52 +1,63 @@
-// A-Frame main JavaScript file
-console.log('A-Frame VR Experience loaded!');
+// Import A-Frame
+import 'aframe'
 
-// Wait for A-Frame to be ready
+// A-Frame is now available globally
+console.log('A-Frame version:', AFRAME.version)
+
+// Add some interactivity
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM loaded, A-Frame should be ready');
+  // Add click handlers to shapes
+  const shapes = document.querySelectorAll('a-box, a-sphere, a-cylinder')
   
-  // Add any custom A-Frame components or logic here
-  // Example: Add click handlers for VR objects
-  
-  // Add click event to the box
-  const box = document.querySelector('a-box');
-  if (box) {
-    box.addEventListener('click', () => {
-      console.log('Box clicked!');
-      // Change box color on click
-      box.setAttribute('color', '#FF6B6B');
-    });
-  }
-  
-  // Add click event to the sphere
-  const sphere = document.querySelector('a-sphere');
-  if (sphere) {
-    sphere.addEventListener('click', () => {
-      console.log('Sphere clicked!');
-      // Change sphere color on click
-      sphere.setAttribute('color', '#4ECDC4');
-    });
-  }
-  
-  // Add click event to the cylinder
-  const cylinder = document.querySelector('a-cylinder');
-  if (cylinder) {
-    cylinder.addEventListener('click', () => {
-      console.log('Cylinder clicked!');
-      // Change cylinder color on click
-      cylinder.setAttribute('color', '#45B7D1');
-    });
-  }
-});
+  shapes.forEach(shape => {
+    shape.addEventListener('click', (event) => {
 
-// Handle VR mode changes
-const scene = document.querySelector('a-scene');
-if (scene) {
-  scene.addEventListener('enter-vr', () => {
-    console.log('Entered VR mode');
-  });
-  
-  scene.addEventListener('exit-vr', () => {
-    console.log('Exited VR mode');
-  });
-}
+      console.log(`${event.target.id} clicked`)
+      
+      // Change color on click
+      const colors = ['#4CC3D9', '#EF2D5E', '#FFC65D', '#7BC8A4', '#FF6B6B', '#4ECDC4']
+      const randomColor = colors[Math.floor(Math.random() * colors.length)]
+      event.target.setAttribute('color', randomColor)
+      
+      // Add a little animation
+      event.target.setAttribute('animation__scale', {
+        property: 'scale',
+        to: '1.2 1.2 1.2',
+        dur: 200,
+        direction: 'alternate'
+      })
+    })
+  })
+
+  // Add keyboard controls
+  document.addEventListener('keydown', (event) => {
+    const scene = document.querySelector('a-scene')
+    
+    switch(event.key) {
+      case 'r':
+        // Reset all shapes to original colors
+        const box = document.querySelector('a-box')
+        const sphere = document.querySelector('a-sphere')
+        const cylinder = document.querySelector('a-cylinder')
+        
+        if (box) box.setAttribute('color', '#4CC3D9')
+        if (sphere) sphere.setAttribute('color', '#EF2D5E')
+        if (cylinder) cylinder.setAttribute('color', '#FFC65D')
+        break
+      case ' ':
+        // Toggle VR mode
+        if (scene.is('vr-mode')) {
+          scene.exitVR()
+        } else {
+          scene.enterVR()
+        }
+        break
+    }
+  })
+
+  console.log('A-Frame VR project loaded!')
+  console.log('Controls:')
+  console.log('- Click shapes to change their color')
+  console.log('- Press R to reset colors')
+  console.log('- Press Space to toggle VR mode')
+})

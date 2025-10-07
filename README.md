@@ -1,34 +1,34 @@
-# A-Frame VR Experience
+# A-Frame VR Project with Vite
 
-A modern VR web experience built with A-Frame 1.7.0 and Vite, optimized for deployment on Vercel.
+A modern VR project built with A-Frame 1.7.0 and Vite for fast development and building.
 
 ## Features
 
-- 🥽 **A-Frame 1.7.0** - Latest stable version of A-Frame
-- ⚡ **Vite** - Fast build tool and development server
-- 📱 **VR Ready** - Works on desktop and mobile VR devices
-- 🎨 **Interactive 3D Scene** - Clickable 3D objects with color changes
-- 🚀 **Vercel Ready** - Optimized for deployment on Vercel
-- 📦 **ES Modules** - Modern JavaScript module system
+- 🚀 **Vite** for lightning-fast development and building
+- 🥽 **A-Frame 1.7.0** for WebXR and VR experiences
+- 📱 **Responsive design** that works on desktop and mobile
+- 🎮 **Interactive elements** with click handlers and animations
+- 🎨 **Modern CSS** with custom styling and animations
+- 🔧 **ES Module syntax** for modern JavaScript
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 16+ 
+- Node.js (version 16 or higher)
 - npm or yarn
 
 ### Installation
 
 1. Install dependencies:
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
-2. Start development server:
-```bash
-npm run dev
-```
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
 3. Open your browser and navigate to `http://localhost:3000`
 
@@ -37,114 +37,83 @@ npm run dev
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
-- `npm run deploy` - Deploy to Vercel
-
-## VR Experience
-
-The scene includes:
-- **Interactive 3D Objects**: Box, sphere, and cylinder that change color when clicked
-- **VR Controls**: Full VR mode support with hand tracking
-- **Responsive Design**: Works on desktop and mobile devices
-- **Modern Lighting**: Ambient and directional lighting with shadows
-
-### VR Controls
-
-- **Desktop**: Use mouse to look around, WASD keys to move
-- **Mobile**: Touch and drag to look around, use VR button for VR mode
-- **VR Headset**: Full 6DOF tracking and hand controllers
-
-## Deployment
-
-### Deploy to Vercel
-
-1. Install Vercel CLI:
-```bash
-npm i -g vercel
-```
-
-2. Deploy:
-```bash
-npm run deploy
-```
-
-Or connect your GitHub repository to Vercel for automatic deployments.
-
-### Build Configuration
-
-The project is configured with:
-- Static site generation
-- Proper routing for SPA
-- Security headers
-- Optimized asset delivery
 
 ## Project Structure
 
 ```
 aframe-test/
 ├── src/
-│   ├── main.js          # Main JavaScript logic
-│   └── style.css        # CSS styles
+│   ├── main.js          # Main JavaScript entry point
+│   └── style.css        # Custom CSS styles
 ├── index.html           # HTML entry point
 ├── vite.config.js       # Vite configuration
-├── vercel.json          # Vercel deployment config
 ├── package.json         # Dependencies and scripts
 └── README.md           # This file
 ```
 
+## Controls
+
+- **Mouse/Touch**: Look around the scene
+- **WASD**: Move around (desktop)
+- **Click**: Change shape colors
+- **R Key**: Reset all shapes to original colors
+- **Space**: Toggle VR mode (if VR headset is available)
+
+## VR Support
+
+This project includes full VR support through A-Frame's WebXR implementation. To test in VR:
+
+1. Use a compatible VR headset (Oculus, HTC Vive, etc.)
+2. Open the project in a WebXR-compatible browser
+3. Press Space or click the VR button to enter VR mode
+
 ## Customization
 
-### Adding New 3D Objects
+### Adding New Shapes
 
-Add new A-Frame entities in `index.html`:
+Add new A-Frame entities to the scene in `index.html`:
 
 ```html
-<a-entity geometry="primitive: box" position="0 1 -3" color="#FF6B6B"></a-entity>
-```
-
-### Adding Interactions
-
-Modify `src/main.js` to add custom interactions:
-
-```javascript
-const newObject = document.querySelector('a-entity');
-newObject.addEventListener('click', () => {
-  // Your interaction code here
-});
+<a-torus position="0 2 -3" radius="1" radius-tubular="0.3" color="#FF6B6B"></a-torus>
 ```
 
 ### Styling
 
-Customize the appearance in `src/style.css` or add new CSS classes.
+Modify `src/style.css` to customize the appearance and add new UI elements.
 
-## Browser Support
+### JavaScript
+
+Add interactivity and custom logic in `src/main.js`. The file already includes:
+- Click handlers for shapes
+- Keyboard controls
+- Color randomization
+- Animation effects
+
+## Browser Compatibility
 
 - Chrome 80+
-- Firefox 75+
-- Safari 13+
+- Firefox 80+
+- Safari 14+
 - Edge 80+
 
-## VR Device Support
+For VR support, use Chrome or Firefox with WebXR support enabled.
 
-- Oculus Quest/Quest 2
-- HTC Vive
-- Windows Mixed Reality
-- Google Cardboard (mobile)
-- WebXR compatible devices
+## Development
+
+The project uses Vite for fast development with:
+- Hot Module Replacement (HMR)
+- ES Module support
+- Optimized builds
+- Source maps for debugging
+
+## Building for Production
+
+```bash
+npm run build
+```
+
+The built files will be in the `dist/` directory, ready for deployment to any static hosting service.
 
 ## License
 
 ISC
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-## Resources
-
-- [A-Frame Documentation](https://aframe.io/docs/)
-- [Vite Documentation](https://vitejs.dev/)
-- [Vercel Documentation](https://vercel.com/docs)
-- [WebXR Documentation](https://immersive-web.github.io/webxr/)

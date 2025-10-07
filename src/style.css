@@ -1,37 +1,84 @@
-/* A-Frame VR Experience Styles */
-
+/* Reset and base styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
+html, body {
+  height: 100%;
   font-family: 'Arial', sans-serif;
-  background: #000;
   overflow: hidden;
-  height: 100vh;
-  width: 100vw;
+}
+
+body {
+  background: #000;
 }
 
 /* A-Frame scene styling */
 a-scene {
   width: 100vw;
   height: 100vh;
-  display: block;
 }
 
-/* VR UI styling */
-.vr-ui {
+/* UI overlay for instructions */
+.ui-overlay {
   position: fixed;
   top: 20px;
   left: 20px;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
   color: white;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 15px;
+  border-radius: 8px;
   font-size: 14px;
+  line-height: 1.4;
+  max-width: 300px;
+  pointer-events: none;
+}
+
+.ui-overlay h3 {
+  margin-bottom: 10px;
+  color: #4CC3D9;
+}
+
+.ui-overlay ul {
+  list-style: none;
+  padding: 0;
+}
+
+.ui-overlay li {
+  margin-bottom: 5px;
+  padding-left: 15px;
+  position: relative;
+}
+
+.ui-overlay li:before {
+  content: "•";
+  color: #4CC3D9;
+  position: absolute;
+  left: 0;
+}
+
+/* VR mode indicator */
+.vr-indicator {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.vr-indicator.active {
+  background: rgba(76, 195, 217, 0.9);
+  color: #000;
 }
 
 /* Loading screen */
@@ -43,95 +90,58 @@ a-scene {
   height: 100%;
   background: #000;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 2000;
   color: white;
-  font-size: 18px;
 }
 
-.loading-screen.hidden {
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #333;
+  border-top: 3px solid #4CC3D9;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Hide loading screen when A-Frame is ready */
+a-scene[loaded] ~ .loading-screen {
   display: none;
 }
 
-/* Instructions overlay */
-.instructions {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 15px 20px;
-  border-radius: 10px;
-  text-align: center;
-  z-index: 1000;
-  font-size: 14px;
-  max-width: 90%;
-}
-
-.instructions h3 {
-  margin-bottom: 10px;
-  color: #4CC3D9;
-}
-
-.instructions p {
-  margin: 5px 0;
-}
-
-/* Mobile responsiveness */
+/* Responsive design */
 @media (max-width: 768px) {
-  .instructions {
+  .ui-overlay {
     font-size: 12px;
-    padding: 10px 15px;
+    padding: 10px;
+    max-width: 250px;
   }
   
-  .vr-ui {
-    font-size: 12px;
-    padding: 8px;
+  .ui-overlay h3 {
+    font-size: 14px;
   }
 }
 
-/* VR mode specific styles */
-.vr-mode .instructions {
-  display: none;
-}
-
-/* Cursor styling for desktop */
-a-cursor {
+/* A-Frame specific styling */
+a-entity {
   cursor: pointer;
 }
 
-/* Animation classes */
-.fade-in {
-  animation: fadeIn 1s ease-in;
+/* Custom animations */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Error states */
-.error {
-  color: #ff6b6b;
-  background: rgba(255, 107, 107, 0.1);
-  border: 1px solid #ff6b6b;
-  padding: 10px;
-  border-radius: 5px;
-  margin: 10px 0;
-}
-
-/* Success states */
-.success {
-  color: #4ecdc4;
-  background: rgba(78, 205, 196, 0.1);
-  border: 1px solid #4ecdc4;
-  padding: 10px;
-  border-radius: 5px;
-  margin: 10px 0;
+.pulse {
+  animation: pulse 2s infinite;
 }

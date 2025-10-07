@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A-Frame VR Experience</title>
+  <title>A-Frame VR Project</title>
   <link rel="stylesheet" href="/src/style.css">
-  <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
 </head>
 <body>
   <a-scene 
-    background="color: #4CC3D9"
+    background="color: #ECECEC"
     vr-mode-ui="enabled: true"
     device-orientation-permission-ui="enabled: true"
     embedded
@@ -64,15 +63,13 @@
     <a-light 
       type="directional" 
       position="2 4 2" 
-      color="#fff" 
+      color="#fff"
       intensity="0.5"
       cast-shadow
     ></a-light>
 
     <!-- Sky -->
-    <a-sky 
-      color="#ECECEC"
-    ></a-sky>
+    <a-sky color="#ECECEC"></a-sky>
   </a-scene>
 
   <script type="module" src="/src/main.js"></script>
